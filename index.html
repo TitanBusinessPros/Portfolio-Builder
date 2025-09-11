@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Portfolio Builder</title>
+    <title>Portfolio Builder - Complete</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600&family=Open+Sans:wght@400;500;600&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2c3e50;
@@ -45,7 +46,6 @@
             overflow: hidden;
         }
 
-        /* Header */
         .app-header {
             text-align: center;
             padding: var(--spacing-lg);
@@ -67,13 +67,11 @@
             margin: 0 auto;
         }
 
-        /* Main Content */
         .app-main {
             display: flex;
             min-height: 600px;
         }
 
-        /* Components Sidebar */
         .components-sidebar {
             width: 250px;
             background: var(--secondary);
@@ -113,7 +111,6 @@
             display: block;
         }
 
-        /* Builder Area */
         .builder-area {
             flex: 1;
             padding: var(--spacing-md);
@@ -166,7 +163,6 @@
             background: #dde4e6;
         }
 
-        /* Components Container */
         .components-container {
             flex: 1;
             padding: var(--spacing-md);
@@ -187,6 +183,7 @@
         .empty-builder-message {
             text-align: center;
             color: #aaa;
+            padding: var(--spacing-lg);
         }
 
         .empty-builder-message i {
@@ -195,7 +192,6 @@
             display: block;
         }
 
-        /* Portfolio Components */
         .portfolio-component {
             background: white;
             border: 1px solid #eee;
@@ -217,6 +213,7 @@
             right: 10px;
             display: flex;
             gap: 0.5rem;
+            z-index: 10;
         }
 
         .control-btn-sm {
@@ -238,7 +235,6 @@
             transform: scale(1.1);
         }
 
-        /* Hero component */
         .hero-component {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: var(--spacing-xl);
@@ -261,7 +257,6 @@
             margin-right: auto;
         }
 
-        /* Gallery component */
         .gallery-component h3 {
             margin-bottom: var(--spacing-md);
             color: var(--primary);
@@ -291,7 +286,6 @@
             transform: scale(1.05);
         }
 
-        /* About component */
         .about-component h3 {
             margin-bottom: var(--spacing-md);
             color: var(--primary);
@@ -304,7 +298,6 @@
             margin: 0 auto;
         }
 
-        /* Contact component */
         .contact-component h3 {
             margin-bottom: var(--spacing-md);
             color: var(--primary);
@@ -329,7 +322,6 @@
             width: 20px;
         }
 
-        /* Customization Panel */
         .customization-panel {
             width: 250px;
             background: var(--secondary);
@@ -400,7 +392,6 @@
             background: #e8f4fc;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -470,7 +461,6 @@
             margin-top: var(--spacing-md);
         }
 
-        /* Export Code Styles */
         .export-code {
             background: #f5f5f5;
             border-radius: var(--border-radius);
@@ -498,7 +488,6 @@
             background: #1a252f;
         }
 
-        /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -510,7 +499,6 @@
             }
         }
 
-        /* Responsive Design */
         @media (max-width: 900px) {
             .app-main {
                 flex-direction: column;
@@ -545,7 +533,6 @@
             }
         }
 
-        /* Font classes */
         .font-inter {
             font-family: 'Inter', sans-serif;
         }
@@ -561,8 +548,11 @@
         .font-montserrat {
             font-family: 'Montserrat', sans-serif;
         }
+
+        .preview-mode .component-controls {
+            display: none;
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600&family=Open+Sans:wght@400;500;600&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body class="font-inter">
     <div class="app-container">
@@ -572,7 +562,6 @@
         </header>
 
         <main class="app-main">
-            <!-- Components Sidebar -->
             <div class="components-sidebar">
                 <h2><i class="fas fa-puzzle-piece"></i> Components</h2>
                 <div class="component-item" data-type="hero">
@@ -597,7 +586,6 @@
                 </div>
             </div>
 
-            <!-- Builder Area -->
             <div class="builder-area">
                 <div class="builder-header">
                     <h2>Your Portfolio Preview</h2>
@@ -620,19 +608,18 @@
                 </div>
             </div>
 
-            <!-- Customization Panel -->
             <div class="customization-panel">
                 <h2><i class="fas fa-sliders-h"></i> Customize</h2>
                 
                 <div class="panel-section">
                     <h3>Color Scheme</h3>
                     <div class="color-palette">
-                        <div class="color-option active" style="background-color: #2c3e50;" data-color="2c3e50"></div>
-                        <div class="color-option" style="background-color: #3498db;" data-color="3498db"></div>
-                        <div class="color-option" style="background-color: #e74c3c;" data-color="e74c3c"></div>
-                        <div class="color-option" style="background-color: #2ecc71;" data-color="2ecc71"></div>
-                        <div class="color-option" style="background-color: #9b59b6;" data-color="9b59b6"></div>
-                        <div class="color-option" style="background-color: #f39c12;" data-color="f39c12"></div>
+                        <div class="color-option active" style="background-color: #2c3e50;" data-color="#2c3e50"></div>
+                        <div class="color-option" style="background-color: #3498db;" data-color="#3498db"></div>
+                        <div class="color-option" style="background-color: #e74c3c;" data-color="#e74c3c"></div>
+                        <div class="color-option" style="background-color: #2ecc71;" data-color="#2ecc71"></div>
+                        <div class="color-option" style="background-color: #9b59b6;" data-color="#9b59b6"></div>
+                        <div class="color-option" style="background-color: #f39c12;" data-color="#f39c12"></div>
                     </div>
                 </div>
                 
@@ -657,20 +644,16 @@
         </main>
     </div>
 
-    <!-- Edit Modal -->
     <div class="modal" id="edit-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Edit Component</h3>
                 <button class="close-modal">&times;</button>
             </div>
-            <div id="edit-form">
-                <!-- Form will be dynamically inserted here -->
-            </div>
+            <div id="edit-form"></div>
         </div>
     </div>
 
-    <!-- Export Modal -->
     <div class="modal" id="export-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -683,18 +666,20 @@
                 <button class="copy-btn" id="copy-code">
                     <i class="fas fa-copy"></i> Copy Code
                 </button>
+                <button class="control-btn btn-primary" id="test-export">
+                    <i class="fas fa-eye"></i> Test Export
+                </button>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // State management
             let components = [];
             let currentEditingComponent = null;
             let currentColor = '#2c3e50';
+            let previewMode = false;
             
-            // DOM elements
             const componentsContainer = document.querySelector('.components-container');
             const componentItems = document.querySelectorAll('.component-item');
             const colorOptions = document.querySelectorAll('.color-option');
@@ -704,17 +689,15 @@
             const editForm = document.getElementById('edit-form');
             const exportCode = document.getElementById('export-code');
             
-            // Initialize the app
             initApp();
             
-            // Set up event listeners
             document.getElementById('export-btn').addEventListener('click', showExportModal);
             document.getElementById('preview-btn').addEventListener('click', togglePreviewMode);
             document.getElementById('save-btn').addEventListener('click', savePortfolio);
             document.getElementById('reset-btn').addEventListener('click', resetPortfolio);
             document.getElementById('copy-code').addEventListener('click', copyCodeToClipboard);
+            document.getElementById('test-export').addEventListener('click', testExport);
             
-            // Close modals when clicking the X
             document.querySelectorAll('.close-modal').forEach(btn => {
                 btn.addEventListener('click', function() {
                     editModal.style.display = 'none';
@@ -722,43 +705,41 @@
                 });
             });
             
-            // Close modals when clicking outside
             window.addEventListener('click', function(e) {
-                if (e.target === editModal) {
+                if (e.target === editModal || e.target === exportModal) {
                     editModal.style.display = 'none';
-                }
-                if (e.target === exportModal) {
                     exportModal.style.display = 'none';
                 }
             });
             
-            // Color picker functionality
             colorOptions.forEach(option => {
                 option.addEventListener('click', function() {
                     colorOptions.forEach(opt => opt.classList.remove('active'));
                     this.classList.add('active');
                     
-                    currentColor = '#' + this.getAttribute('data-color');
+                    currentColor = this.getAttribute('data-color');
                     document.documentElement.style.setProperty('--primary', currentColor);
+                    updateButtonColors();
                 });
             });
             
-            // Font options functionality
+            function updateButtonColors() {
+                document.querySelectorAll('.btn-primary, .control-btn-sm').forEach(btn => {
+                    btn.style.backgroundColor = currentColor;
+                });
+            }
+            
             fontOptions.forEach(option => {
                 option.addEventListener('click', function() {
                     fontOptions.forEach(opt => opt.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Remove all font classes
                     document.body.classList.remove('font-inter', 'font-roboto', 'font-open-sans', 'font-montserrat');
-                    // Add the selected font class
                     document.body.classList.add('font-' + this.getAttribute('data-font'));
                 });
             });
             
-            // Initialize the application
             function initApp() {
-                // Add click events to component items
                 componentItems.forEach(item => {
                     item.addEventListener('click', function() {
                         const type = this.getAttribute('data-type');
@@ -766,11 +747,10 @@
                     });
                 });
                 
-                // Load saved portfolio if available
                 loadPortfolio();
+                updateButtonColors();
             }
             
-            // Add a new component
             function addComponent(type) {
                 const id = 'component-' + Date.now();
                 const component = {
@@ -781,12 +761,9 @@
                 
                 components.push(component);
                 renderComponent(component);
-                
-                // Update the empty state
                 updateEmptyState();
             }
             
-            // Get default data for component type
             function getDefaultDataForType(type) {
                 switch(type) {
                     case 'hero':
@@ -830,7 +807,6 @@
                 }
             }
             
-            // Render a component
             function renderComponent(component) {
                 const element = document.createElement('div');
                 element.className = 'portfolio-component';
@@ -898,7 +874,10 @@
                 element.innerHTML = html;
                 componentsContainer.appendChild(element);
                 
-                // Add event listeners to control buttons
+                element.querySelectorAll('.btn-primary, .control-btn-sm').forEach(btn => {
+                    btn.style.backgroundColor = currentColor;
+                });
+                
                 element.querySelector('.delete-btn').addEventListener('click', function() {
                     deleteComponent(component.id);
                 });
@@ -908,7 +887,6 @@
                 });
             }
             
-            // Open edit modal
             function openEditModal(component) {
                 currentEditingComponent = component;
                 
@@ -982,7 +960,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="edit-email">Email</label>
-                                <input type="email" id="edit-email" value="${component.data.email}">
+                                <input type="text" id="edit-email" value="${component.data.email}">
                             </div>
                             <div class="form-group">
                                 <label for="edit-phone">Phone</label>
@@ -993,98 +971,172 @@
                             </div>
                         `;
                         break;
-                    default:
-                        formHTML = `<p>Editing is not supported for this component type.</p>`;
                 }
                 
                 editForm.innerHTML = formHTML;
-                document.getElementById('save-edit').addEventListener('click', saveEditedComponent);
                 editModal.style.display = 'flex';
+                
+                document.getElementById('save-edit').addEventListener('click', function() {
+                    saveEditedComponent(component);
+                });
             }
             
-            // Save edited component
-            function saveEditedComponent() {
-                if (!currentEditingComponent) return;
-                
-                switch(currentEditingComponent.type) {
+            function saveEditedComponent(component) {
+                switch(component.type) {
                     case 'hero':
-                        currentEditingComponent.data.title = document.getElementById('edit-title').value;
-                        currentEditingComponent.data.subtitle = document.getElementById('edit-subtitle').value;
-                        currentEditingComponent.data.buttonText = document.getElementById('edit-buttonText').value;
-                        currentEditingComponent.data.buttonLink = document.getElementById('edit-buttonLink').value;
+                        component.data.title = document.getElementById('edit-title').value;
+                        component.data.subtitle = document.getElementById('edit-subtitle').value;
+                        component.data.buttonText = document.getElementById('edit-buttonText').value;
+                        component.data.buttonLink = document.getElementById('edit-buttonLink').value;
                         break;
                     case 'gallery':
-                        currentEditingComponent.data.title = document.getElementById('edit-title').value;
-                        
-                        // For gallery items, we need to handle multiple inputs
-                        const imageInputs = document.querySelectorAll('input[data-field="image"]');
-                        const titleInputs = document.querySelectorAll('input[data-field="title"]');
-                        
-                        imageInputs.forEach(input => {
-                            const index = parseInt(input.getAttribute('data-index'));
-                            currentEditingComponent.data.items[index].image = input.value;
-                        });
-                        
-                        titleInputs.forEach(input => {
-                            const index = parseInt(input.getAttribute('data-index'));
-                            currentEditingComponent.data.items[index].title = input.value;
+                        component.data.title = document.getElementById('edit-title').value;
+                        document.querySelectorAll('#edit-form input').forEach(input => {
+                            if (input.id !== 'edit-title') {
+                                const index = parseInt(input.getAttribute('data-index'));
+                                const field = input.getAttribute('data-field');
+                                component.data.items[index][field] = input.value;
+                            }
                         });
                         break;
                     case 'about':
-                        currentEditingComponent.data.title = document.getElementById('edit-title').value;
-                        currentEditingComponent.data.content = document.getElementById('edit-content').value;
+                        component.data.title = document.getElementById('edit-title').value;
+                        component.data.content = document.getElementById('edit-content').value;
                         break;
                     case 'contact':
-                        currentEditingComponent.data.title = document.getElementById('edit-title').value;
-                        currentEditingComponent.data.email = document.getElementById('edit-email').value;
-                        currentEditingComponent.data.phone = document.getElementById('edit-phone').value;
+                        component.data.title = document.getElementById('edit-title').value;
+                        component.data.email = document.getElementById('edit-email').value;
+                        component.data.phone = document.getElementById('edit-phone').value;
                         break;
                 }
                 
-                // Re-render the component
-                const element = document.getElementById(currentEditingComponent.id);
-                element.parentNode.removeChild(element);
-                renderComponent(currentEditingComponent);
-                
+                document.getElementById(component.id).remove();
+                renderComponent(component);
                 editModal.style.display = 'none';
+                savePortfolio();
             }
             
-            // Delete a component
             function deleteComponent(id) {
-                components = components.filter(c => c.id !== id);
+                components = components.filter(component => component.id !== id);
                 document.getElementById(id).remove();
-                
-                // Update the empty state
                 updateEmptyState();
+                savePortfolio();
             }
             
-            // Update empty state
             function updateEmptyState() {
                 if (components.length === 0) {
                     componentsContainer.classList.add('empty');
-                    componentsContainer.innerHTML = `
-                        <div class="empty-builder-message">
-                            <i class="fas fa-arrow-left"></i>
-                            <h3>Your portfolio is empty</h3>
-                            <p>Click on components to the left to add them to your portfolio</p>
-                        </div>
-                    `;
                 } else {
                     componentsContainer.classList.remove('empty');
                 }
             }
             
-            // Show export modal
-            function showExportModal() {
-                generateExportCode();
-                exportModal.style.display = 'flex';
+            function togglePreviewMode() {
+                previewMode = !previewMode;
+                document.querySelector('.app-container').classList.toggle('preview-mode', previewMode);
+                
+                const previewBtn = document.getElementById('preview-btn');
+                if (previewMode) {
+                    previewBtn.innerHTML = '<i class="fas fa-edit"></i> Edit';
+                } else {
+                    previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview';
+                }
             }
             
-            // Generate export code
-            function generateExportCode() {
-                const fontClass = document.body.className.match(/font-\w+/)[0];
-                const fontName = fontClass.replace('font-', '');
+            function savePortfolio() {
+                const portfolioData = {
+                    components: components,
+                    color: currentColor,
+                    font: document.querySelector('.font-option.active').getAttribute('data-font')
+                };
                 
+                localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
+                
+                // Show a brief confirmation
+                const saveBtn = document.getElementById('save-btn');
+                const originalText = saveBtn.innerHTML;
+                saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                
+                setTimeout(() => {
+                    saveBtn.innerHTML = originalText;
+                }, 2000);
+            }
+            
+            function loadPortfolio() {
+                const savedData = localStorage.getItem('portfolioData');
+                if (savedData) {
+                    const portfolioData = JSON.parse(savedData);
+                    components = portfolioData.components || [];
+                    currentColor = portfolioData.color || '#2c3e50';
+                    
+                    // Apply saved color
+                    document.documentElement.style.setProperty('--primary', currentColor);
+                    colorOptions.forEach(option => {
+                        if (option.getAttribute('data-color') === currentColor) {
+                            option.classList.add('active');
+                        } else {
+                            option.classList.remove('active');
+                        }
+                    });
+                    
+                    // Apply saved font
+                    const savedFont = portfolioData.font || 'inter';
+                    document.body.classList.remove('font-inter', 'font-roboto', 'font-open-sans', 'font-montserrat');
+                    document.body.classList.add('font-' + savedFont);
+                    fontOptions.forEach(option => {
+                        if (option.getAttribute('data-font') === savedFont) {
+                            option.classList.add('active');
+                        } else {
+                            option.classList.remove('active');
+                        }
+                    });
+                    
+                    // Render components
+                    components.forEach(component => {
+                        renderComponent(component);
+                    });
+                    
+                    updateEmptyState();
+                    updateButtonColors();
+                }
+            }
+            
+            function resetPortfolio() {
+                if (confirm('Are you sure you want to reset your portfolio? This cannot be undone.')) {
+                    components = [];
+                    componentsContainer.innerHTML = '';
+                    updateEmptyState();
+                    localStorage.removeItem('portfolioData');
+                    
+                    // Reset to defaults
+                    currentColor = '#2c3e50';
+                    document.documentElement.style.setProperty('--primary', currentColor);
+                    colorOptions.forEach(option => {
+                        if (option.getAttribute('data-color') === currentColor) {
+                            option.classList.add('active');
+                        } else {
+                            option.classList.remove('active');
+                        }
+                    });
+                    
+                    document.body.classList.remove('font-inter', 'font-roboto', 'font-open-sans', 'font-montserrat');
+                    document.body.classList.add('font-inter');
+                    fontOptions.forEach(option => {
+                        if (option.getAttribute('data-font') === 'inter') {
+                            option.classList.add('active');
+                        } else {
+                            option.classList.remove('active');
+                        }
+                    });
+                    
+                    updateButtonColors();
+                }
+            }
+            
+            function showExportModal() {
+                exportModal.style.display = 'flex';
+                
+                // Generate the HTML code for export
                 let htmlCode = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1092,168 +1144,223 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600&family=Open+Sans:wght@400;500;600&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: ${currentColor};
             --secondary: #ecf0f1;
+            --accent: #3498db;
             --text: #333;
             --light-text: #777;
             --spacing-sm: 0.5rem;
             --spacing-md: 1rem;
             --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
             --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: '${fontName}', sans-serif;
+            font-family: '${document.querySelector('.font-option.active').textContent}', sans-serif;
             color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             line-height: 1.6;
-            background: #f9f9f9;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+            min-height: 100vh;
             padding: var(--spacing-md);
         }
-        
-        .hero {
+
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .hero-component {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: var(--spacing-lg);
+            padding: var(--spacing-xl);
             text-align: center;
             border-radius: var(--border-radius);
-            margin-bottom: var(--spacing-lg);
         }
-        
-        .gallery {
+
+        .hero-component h2 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--primary);
+        }
+
+        .hero-component p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-bottom: var(--spacing-lg);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: #1a252f;
+        }
+
+        .gallery-component {
+            padding: var(--spacing-lg);
+        }
+
+        .gallery-component h3 {
+            margin-bottom: var(--spacing-md);
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
         }
-        
+
         .gallery-item {
+            position: relative;
             border-radius: var(--border-radius);
             overflow: hidden;
             height: 150px;
         }
-        
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: var(--transition);
         }
-        
+
         .gallery-item:hover img {
             transform: scale(1.05);
         }
-        
-        .section {
-            margin-bottom: var(--spacing-lg);
-            padding: var(--spacing-md);
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        .about-component {
+            padding: var(--spacing-lg);
         }
-        
-        .centered-section {
+
+        .about-component h3 {
+            margin-bottom: var(--spacing-md);
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .about-component p {
             text-align: center;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
         }
-        
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: var(--primary);
-            color: white;
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
+
+        .contact-component {
+            padding: var(--spacing-lg);
         }
-        
+
+        .contact-component h3 {
+            margin-bottom: var(--spacing-md);
+            color: var(--primary);
+            text-align: center;
+        }
+
         .contact-details {
             display: flex;
             flex-direction: column;
             gap: var(--spacing-sm);
             align-items: center;
         }
-        
+
         .contact-detail {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
         }
-        
+
         .contact-detail i {
-            color: var(--primary);
+            color: var(--accent);
             width: 20px;
         }
-        
+
         @media (max-width: 900px) {
-            .gallery {
+            .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-        
+
         @media (max-width: 600px) {
-            .gallery {
+            .gallery-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .hero-component h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-component {
+                padding: var(--spacing-lg);
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=${fontName}:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">`;
+    <div class="portfolio-container">`;
 
+                // Add each component to the exported code
                 components.forEach(component => {
                     switch(component.type) {
                         case 'hero':
                             htmlCode += `
-        <section class="hero">
+        <div class="hero-component">
             <h2>${component.data.title}</h2>
             <p>${component.data.subtitle}</p>
-            <a href="${component.data.buttonLink}" class="btn">${component.data.buttonText}</a>
-        </section>`;
+            <a href="${component.data.buttonLink}" class="btn-primary">${component.data.buttonText}</a>
+        </div>`;
                             break;
                         case 'gallery':
                             htmlCode += `
-        <section class="section">
+        <div class="gallery-component">
             <h3>${component.data.title}</h3>
-            <div class="gallery">`;
-                            
-                            component.data.items.forEach(item => {
-                                htmlCode += `
+            <div class="gallery-grid">
+                ${component.data.items.map(item => `
                 <div class="gallery-item">
                     <img src="${item.image}" alt="${item.title}">
-                </div>`;
-                            });
-                            
-                            htmlCode += `
+                </div>`).join('')}
             </div>
-        </section>`;
+        </div>`;
                             break;
                         case 'about':
                             htmlCode += `
-        <section class="section centered-section">
+        <div class="about-component">
             <h3>${component.data.title}</h3>
             <p>${component.data.content.replace(/\n/g, '<br>')}</p>
-        </section>`;
+        </div>`;
                             break;
                         case 'contact':
                             htmlCode += `
-        <section class="section centered-section">
+        <div class="contact-component">
             <h3>${component.data.title}</h3>
             <div class="contact-details">
                 <div class="contact-detail">
@@ -1265,7 +1372,7 @@
                     <span>${component.data.phone}</span>
                 </div>
             </div>
-        </section>`;
+        </div>`;
                             break;
                     }
                 });
@@ -1278,95 +1385,27 @@
                 exportCode.textContent = htmlCode;
             }
             
-            // Copy code to clipboard
             function copyCodeToClipboard() {
-                const code = exportCode.textContent;
-                navigator.clipboard.writeText(code).then(() => {
-                    alert('Code copied to clipboard!');
-                });
-            }
-            
-            // Toggle preview mode
-            function togglePreviewMode() {
-                const sidebar = document.querySelector('.components-sidebar');
-                const customizationPanel = document.querySelector('.customization-panel');
-                const controls = document.querySelectorAll('.component-controls');
+                const textarea = document.createElement('textarea');
+                textarea.value = exportCode.textContent;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
                 
-                if (sidebar.style.display === 'none') {
-                    sidebar.style.display = 'block';
-                    customizationPanel.style.display = 'block';
-                    controls.forEach(control => control.style.display = 'flex');
-                    this.innerHTML = '<i class="fas fa-eye"></i> Preview';
-                } else {
-                    sidebar.style.display = 'none';
-                    customizationPanel.style.display = 'none';
-                    controls.forEach(control => control.style.display = 'none');
-                    this.innerHTML = '<i class="fas fa-edit"></i> Edit';
-                }
-            }
-            
-            // Save portfolio
-            function savePortfolio() {
-                const portfolioData = {
-                    components: components,
-                    styles: {
-                        primary: currentColor,
-                        font: document.body.className.match(/font-\w+/)[0]
-                    }
-                };
+                const copyBtn = document.getElementById('copy-code');
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
                 
-                localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
-                alert('Portfolio saved successfully!');
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
+                }, 2000);
             }
             
-            // Reset portfolio
-            function resetPortfolio() {
-                if (confirm('Are you sure you want to reset your portfolio? This action cannot be undone.')) {
-                    components = [];
-                    componentsContainer.innerHTML = '';
-                    updateEmptyState();
-                    localStorage.removeItem('portfolioData');
-                }
-            }
-            
-            // Load portfolio (if available)
-            function loadPortfolio() {
-                const savedData = localStorage.getItem('portfolioData');
-                if (savedData) {
-                    const portfolioData = JSON.parse(savedData);
-                    components = portfolioData.components;
-                    
-                    // Apply styles
-                    if (portfolioData.styles) {
-                        currentColor = portfolioData.styles.primary;
-                        document.documentElement.style.setProperty('--primary', currentColor);
-                        document.body.classList.add(portfolioData.styles.font);
-                        
-                        // Update color picker
-                        colorOptions.forEach(option => {
-                            option.classList.remove('active');
-                            if ('#' + option.getAttribute('data-color') === currentColor.replace('#', '')) {
-                                option.classList.add('active');
-                            }
-                        });
-                        
-                        // Update font option
-                        fontOptions.forEach(option => {
-                            option.classList.remove('active');
-                            if ('font-' + option.getAttribute('data-font') === portfolioData.styles.font) {
-                                option.classList.add('active');
-                            }
-                        });
-                    }
-                    
-                    // Render components
-                    components.forEach(component => {
-                        renderComponent(component);
-                    });
-                    
-                    // Update the empty state
-                    updateEmptyState();
-                }
+            function testExport() {
+                const htmlCode = exportCode.textContent;
+                const blob = new Blob([htmlCode], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                window.open(url, '_blank');
             }
         });
     </script>
