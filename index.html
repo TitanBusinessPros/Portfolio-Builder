@@ -771,7 +771,7 @@
                             title: 'Your Name',
                             subtitle: 'Creative Designer & Developer',
                             buttonText: 'View My Work',
-                            buttonLink: '#work'
+                            buttonLink: 'https://www.google.com' // Fixed: Changed from '#work' to Google
                         };
                     case 'gallery':
                         return {
@@ -819,7 +819,7 @@
                             <div class="hero-component">
                                 <h2>${component.data.title}</h2>
                                 <p>${component.data.subtitle}</p>
-                                <a href="${component.data.buttonLink}" class="control-btn btn-primary">${component.data.buttonText}</a>
+                                <a href="${component.data.buttonLink}" class="control-btn btn-primary" target="_blank">${component.data.buttonText}</a>
                             </div>
                         `;
                         break;
@@ -908,7 +908,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="edit-buttonLink">Button Link</label>
-                                <input type="text" id="edit-buttonLink" value="${component.data.buttonLink}">
+                                <input type="text" id="edit-buttonLink" value="${component.data.buttonLink}" placeholder="https://www.google.com">
                             </div>
                             <div class="modal-actions">
                                 <button class="control-btn btn-primary" id="save-edit">Save Changes</button>
@@ -1088,6 +1088,13 @@
                             option.classList.add('active');
                         } else {
                             option.classList.remove('active');
+                        }
+                    });
+                    
+                    // Fix old hero components with the wrong link
+                    components.forEach(component => {
+                        if (component.type === 'hero' && component.data.buttonLink === '#work') {
+                            component.data.buttonLink = 'https://www.google.com';
                         }
                     });
                     
@@ -1336,7 +1343,7 @@
         <div class="hero-component">
             <h2>${component.data.title}</h2>
             <p>${component.data.subtitle}</p>
-            <a href="${component.data.buttonLink}" class="btn-primary">${component.data.buttonText}</a>
+            <a href="${component.data.buttonLink}" class="btn-primary" target="_blank">${component.data.buttonText}</a>
         </div>`;
                             break;
                         case 'gallery':
