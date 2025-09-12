@@ -20,7 +20,6 @@
             --border-radius: 8px;
             --transition: all 0.3s ease;
             --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            --header-bg: #2c3e50; /* Added variable for header background */
         }
 
         * {
@@ -50,7 +49,7 @@
         .app-header {
             text-align: center;
             padding: var(--spacing-lg);
-            background: var(--header-bg); /* Using variable instead of hardcoded color */
+            background: var(--primary);
             color: white;
         }
 
@@ -223,7 +222,7 @@
             border-radius: 50%;
             background: var(--primary);
             color: white;
-            border: none;
+            border: noe;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -553,6 +552,28 @@
         .preview-mode .component-controls {
             display: none;
         }
+        
+        /* New styles for exported website header */
+        .portfolio-header {
+            text-align: center;
+            padding: var(--spacing-lg);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .portfolio-header h1 {
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .portfolio-header p {
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body class="font-inter">
@@ -634,10 +655,7 @@
                 
                 <div class="panel-section">
                     <h3>Actions</h3>
-                    <button class="control-btn btn-primary" style="width: 100%;" id="save-btn">
-                        <i class="fas fa-save"></i> Save Portfolio
-                    </button>
-                    <button class="control-btn btn-secondary" style="width: 100%; margin-top: 0.5rem;" id="reset-btn">
+                    <button class="control-btn btn-secondary" style="width: 100%;" id="reset-btn">
                         <i class="fas fa-trash"></i> Reset All
                     </button>
                 </div>
@@ -694,7 +712,6 @@
             
             document.getElementById('export-btn').addEventListener('click', showExportModal);
             document.getElementById('preview-btn').addEventListener('click', togglePreviewMode);
-            document.getElementById('save-btn').addEventListener('click', savePortfolio);
             document.getElementById('reset-btn').addEventListener('click', resetPortfolio);
             document.getElementById('copy-code').addEventListener('click', copyCodeToClipboard);
             document.getElementById('test-export').addEventListener('click', testExport);
@@ -720,7 +737,6 @@
                     
                     currentColor = this.getAttribute('data-color');
                     document.documentElement.style.setProperty('--primary', currentColor);
-                    document.documentElement.style.setProperty('--header-bg', currentColor); // Update header background
                     updateButtonColors();
                 });
             });
@@ -749,7 +765,6 @@
                     });
                 });
                 
-                loadPortfolio();
                 updateButtonColors();
             }
             
@@ -773,7 +788,7 @@
                             title: 'Your Name',
                             subtitle: 'Creative Designer & Developer',
                             buttonText: 'View My Work',
-                            buttonLink: 'https://www.google.com' // Fixed: Changed from '#work' to Google
+                            buttonLink: 'https://www.google.com'
                         };
                     case 'gallery':
                         return {
@@ -821,7 +836,7 @@
                             <div class="hero-component">
                                 <h2>${component.data.title}</h2>
                                 <p>${component.data.subtitle}</p>
-                                <a href="${component.data.buttonLink}" class="control-btn btn-primary" target="_blank">${component.data.buttonText}</a>
+                                <a href="${component.data.buttonLink}" class="control-btn btn-primary">${component.data.buttonText}</a>
                             </div>
                         `;
                         break;
@@ -910,7 +925,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="edit-buttonLink">Button Link</label>
-                                <input type="text" id="edit-buttonLink" value="${component.data.buttonLink}" placeholder="https://www.google.com">
+                                <input type="text" id="edit-buttonLink" value="${component.data.buttonLink}">
                             </div>
                             <div class="modal-actions">
                                 <button class="control-btn btn-primary" id="save-edit">Save Changes</button>
@@ -1015,14 +1030,12 @@
                 document.getElementById(component.id).remove();
                 renderComponent(component);
                 editModal.style.display = 'none';
-                savePortfolio();
             }
             
             function deleteComponent(id) {
                 components = components.filter(component => component.id !== id);
                 document.getElementById(id).remove();
                 updateEmptyState();
-                savePortfolio();
             }
             
             function updateEmptyState() {
@@ -1045,83 +1058,15 @@
                 }
             }
             
-            function savePortfolio() {
-                const portfolioData = {
-                    components: components,
-                    color: currentColor,
-                    font: document.querySelector('.font-option.active').getAttribute('data-font')
-                };
-                
-                localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
-                
-                // Show a brief confirmation
-                const saveBtn = document.getElementById('save-btn');
-                const originalText = saveBtn.innerHTML;
-                saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
-                
-                setTimeout(() => {
-                    saveBtn.innerHTML = originalText;
-                }, 2000);
-            }
-            
-            function loadPortfolio() {
-                const savedData = localStorage.getItem('portfolioData');
-                if (savedData) {
-                    const portfolioData = JSON.parse(savedData);
-                    components = portfolioData.components || [];
-                    currentColor = portfolioData.color || '#2c3e50';
-                    
-                    // Apply saved color
-                    document.documentElement.style.setProperty('--primary', currentColor);
-                    document.documentElement.style.setProperty('--header-bg', currentColor);
-                    colorOptions.forEach(option => {
-                        if (option.getAttribute('data-color') === currentColor) {
-                            option.classList.add('active');
-                        } else {
-                            option.classList.remove('active');
-                        }
-                    });
-                    
-                    // Apply saved font
-                    const savedFont = portfolioData.font || 'inter';
-                    document.body.classList.remove('font-inter', 'font-roboto', 'font-open-sans', 'font-montserrat');
-                    document.body.classList.add('font-' + savedFont);
-                    fontOptions.forEach(option => {
-                        if (option.getAttribute('data-font') === savedFont) {
-                            option.classList.add('active');
-                        } else {
-                            option.classList.remove('active');
-                        }
-                    });
-                    
-                    // Fix old hero components with the wrong link
-                    components.forEach(component => {
-                        if (component.type === 'hero' && component.data.buttonLink === '#work') {
-                            component.data.buttonLink = 'https://www.google.com';
-                        }
-                    });
-                    
-                    // Render components
-                    components.forEach(component => {
-                        renderComponent(component);
-                    });
-                    
-                    updateEmptyState();
-                    updateButtonColors();
-                }
-            }
-            
             function resetPortfolio() {
                 if (confirm('Are you sure you want to reset your portfolio? This cannot be undone.')) {
                     components = [];
                     componentsContainer.innerHTML = '';
                     updateEmptyState();
-                    localStorage.removeItem('portfolioData');
                     
                     // Reset to defaults
                     currentColor = '#2c3e50';
                     document.documentElement.style.setProperty('--primary', currentColor);
-                    document.documentElement.style.setProperty('--header-bg', currentColor);
                     colorOptions.forEach(option => {
                         if (option.getAttribute('data-color') === currentColor) {
                             option.classList.add('active');
@@ -1187,19 +1132,6 @@
             padding: var(--spacing-md);
         }
 
-        .portfolio-header {
-            text-align: center;
-            padding: var(--spacing-lg);
-            background: var(--primary);
-            color: white;
-            margin-bottom: var(--spacing-lg);
-            border-radius: var(--border-radius);
-        }
-
-        .portfolio-header h1 {
-            margin-bottom: var(--spacing-sm);
-        }
-
         .portfolio-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -1207,6 +1139,27 @@
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             overflow: hidden;
+        }
+        
+        .portfolio-header {
+            text-align: center;
+            padding: var(--spacing-lg);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .portfolio-header h1 {
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .portfolio-header p {
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .hero-component {
@@ -1350,12 +1303,11 @@
     </style>
 </head>
 <body>
-    <div class="portfolio-header">
-        <h1>My Portfolio</h1>
-        <p>A showcase of my work and skills</p>
-    </div>
-    
-    <div class="portfolio-container">`;
+    <div class="portfolio-container">
+        <header class="portfolio-header">
+            <h1><i class="fas fa-user"></i> My Portfolio</h1>
+            <p>Welcome to my professional portfolio</p>
+        </header>`;
 
                 // Add each component to the exported code
                 components.forEach(component => {
@@ -1365,7 +1317,7 @@
         <div class="hero-component">
             <h2>${component.data.title}</h2>
             <p>${component.data.subtitle}</p>
-            <a href="${component.data.buttonLink}" class="btn-primary" target="_blank">${component.data.buttonText}</a>
+            <a href="${component.data.buttonLink}" class="btn-primary">${component.data.buttonText}</a>
         </div>`;
                             break;
                         case 'gallery':
